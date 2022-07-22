@@ -29,7 +29,7 @@ const LoginButton = styled(Button)`
 const CustomButtons = () => {
   return (
     <Wrapper>
-      <LoginButton>Login</LoginButton>
+      <LoginButton variant="contained">Login</LoginButton>
       <Typography style={{ marginTop: 3, width: 135 }}>
         Become a Seller
       </Typography>
