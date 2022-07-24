@@ -13,6 +13,7 @@ export const authenticatesLogin = async (data) => {
   try {
     return await axios.post(`${URL}/login`, data);
   } catch (error) {
-    console.log("error while calling signup", error);
+    console.log("error while calling login", error);
+    return error.response;
   }
 };

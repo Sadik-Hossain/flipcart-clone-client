@@ -100,9 +100,11 @@ const LoginDialog = ({ open, setOpen }) => {
   const [signup, setSignup] = useState(SignupInitialValues);
   const { setAccount } = useContext(DataContext);
   const [login, setLogin] = useState(loginInitialValues);
+  const [error, setError] = useState(false);
   const handleClose = () => {
     setOpen(false);
     toggleAccount(accountInitialValues.login);
+    setError(false);
   };
 
   const toggleSignUp = () => {
@@ -134,6 +136,13 @@ const LoginDialog = ({ open, setOpen }) => {
 
   const loginUser = async () => {
     let res = await authenticatesLogin(login);
+    // console.log(res);
+    if (res.status === 200) {
+      handleClose();
+      setAccount(res.data.data.firstname);
+    } else {
+      setError(true);
+    }
   };
 
   return (
@@ -166,8 +175,13 @@ const LoginDialog = ({ open, setOpen }) => {
                 variant="standard"
                 onChange={(e) => onValueChange(e)}
                 name="username"
-                label="Enter Email/Mobile number"
+                label="Enter username"
               />
+              {error && (
+                <Typography style={{ color: "red" }}>
+                  Please enter valid username/password
+                </Typography>
+              )}
               <TextField
                 variant="standard"
                 onChange={(e) => onValueChange(e)}
