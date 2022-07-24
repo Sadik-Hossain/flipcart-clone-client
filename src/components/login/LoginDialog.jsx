@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+
 import {
   Dialog,
   Box,
@@ -8,7 +9,8 @@ import {
   styled,
 } from "@mui/material";
 import { CollectionsTwoTone } from "@mui/icons-material";
-import { authenticatesSignUp } from "../../service/api";
+import { authenticatesLogin, authenticatesSignUp } from "../../service/api";
+import { DataContext } from "../../context/DataProvider";
 
 const Component = styled(Box)`
   height: 70vh;
@@ -88,17 +90,23 @@ const SignupInitialValues = {
   email: "",
   password: "",
 };
+const loginInitialValues = {
+  username: "",
+  password: "",
+};
 
 const LoginDialog = ({ open, setOpen }) => {
-  const [account, setAccount] = useState(accountInitialValues.login);
+  const [account, toggleAccount] = useState(accountInitialValues.login);
   const [signup, setSignup] = useState(SignupInitialValues);
+  const { setAccount } = useContext(DataContext);
+  const [login, setLogin] = useState(loginInitialValues);
   const handleClose = () => {
     setOpen(false);
-    setAccount(accountInitialValues.login);
+    toggleAccount(accountInitialValues.login);
   };
 
   const toggleSignUp = () => {
-    setAccount(accountInitialValues.signup);
+    toggleAccount(accountInitialValues.signup);
   };
 
   const onInputChange = (e) => {
@@ -112,6 +120,20 @@ const LoginDialog = ({ open, setOpen }) => {
 
   const signupUser = async () => {
     let res = await authenticatesSignUp(signup);
+    // console.log(res);
+    if (!res) {
+      return;
+    }
+    handleClose();
+    setAccount(signup.firstname);
+  };
+
+  const onValueChange = (e) => {
+    setLogin({ ...login, [e.target.name]: e.target.value });
+  };
+
+  const loginUser = async () => {
+    let res = await authenticatesLogin(login);
   };
 
   return (
@@ -140,10 +162,20 @@ const LoginDialog = ({ open, setOpen }) => {
           </Image>
           {account.view === "login" ? (
             <Wrapper>
-              <TextField variant="standard" label="Enter Email/Mobile number" />
-              <TextField variant="standard" label="Enter password" />
+              <TextField
+                variant="standard"
+                onChange={(e) => onValueChange(e)}
+                name="username"
+                label="Enter Email/Mobile number"
+              />
+              <TextField
+                variant="standard"
+                onChange={(e) => onValueChange(e)}
+                name="password"
+                label="Enter password"
+              />
               <Text>By continuing, you agree to terms and service</Text>
-              <LoginButton>Login</LoginButton>
+              <LoginButton onClick={() => loginUser()}>Login</LoginButton>
               <Typography style={{ textAlign: "center" }}>OR</Typography>
               <RequestOTP>Request OTP</RequestOTP>
               <CreatedAccount
