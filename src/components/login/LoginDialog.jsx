@@ -8,7 +8,6 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import { CollectionsTwoTone } from "@mui/icons-material";
 import { authenticatesLogin, authenticatesSignUp } from "../../service/api";
 import { DataContext } from "../../context/DataProvider";
 
