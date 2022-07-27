@@ -3,7 +3,8 @@ import * as actionTypes from "../constants/productConstant";
 
 //* An action, is an object that contains the payload of information. They are the only source of information for the Redux store to be updated. Reducers update store based on the value of the action.type
 
-const URL = `http://localhost:5001`;
+// const URL = `http://localhost:5001`;
+const URL = `https://flipcart-clone-server.herokuapp.com`;
 
 export const getProducts = () => async (dispatch) => {
   //* action can also be used for api calls,
