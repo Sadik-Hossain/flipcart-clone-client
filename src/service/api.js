@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const URL = `http://localhost:5001`;
+// const URL = `http://localhost:5001`;
+const URL = `https://flipcart-clone-server.herokuapp.com/`;
 export const authenticatesSignUp = async (data) => {
   try {
     return await axios.post(`${URL}/signup`, data);
