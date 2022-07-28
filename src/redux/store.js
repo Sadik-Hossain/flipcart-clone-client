@@ -1,12 +1,16 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
-import { getProductReducer } from "./reducers/productReducer";
+import {
+  getProductDetailsReducer,
+  getProductReducer,
+} from "./reducers/productReducer";
 
 //* multiple reducer have to get combined with combineReducer fn
 //* combineReducer takes an obj, inside that obj we pass mutiple reducers
 const reducer = combineReducers({
   getProducts: getProductReducer,
+  getProductDetails: getProductDetailsReducer,
 });
 
 const middleware = [thunk];

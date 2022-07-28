@@ -3,8 +3,8 @@ import * as actionTypes from "../constants/productConstant";
 
 //* An action, is an object that contains the payload of information. They are the only source of information for the Redux store to be updated. Reducers update store based on the value of the action.type
 
-// const URL = `http://localhost:5001`;
-const URL = `https://flipcart-clone-server.herokuapp.com`;
+const URL = `http://localhost:5001`;
+// const URL = `https://flipcart-clone-server.herokuapp.com`;
 
 export const getProducts = () => async (dispatch) => {
   //* action can also be used for api calls,
@@ -20,6 +20,18 @@ export const getProducts = () => async (dispatch) => {
   } catch (error) {
     console.log("Error while calling api", error.message);
     dispatch({ type: actionTypes.GET_PRODUCTS_FAIL, payload: error.message });
+  }
+};
+export const getProductDetails = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: actionTypes.GET_PRODUCT_DETAILS_REQUEST });
+    const { data } = await axios.get(`${URL}/product/${id}`);
+    dispatch({ type: actionTypes.GET_PRODUCT_DETAILS_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: actionTypes.GET_PRODUCT_DETAILS_FAILED,
+      payload: error.message,
+    });
   }
 };
 /**
