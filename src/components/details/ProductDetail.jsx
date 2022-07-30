@@ -62,19 +62,19 @@ const ProductDetail = ({ product }) => {
         </Box>
       </Typography>
       <SmallText>
-        <Typography>
+        <Typography style={{ display: "flex", alignItems: "center" }}>
           <StyledBadge />
           Get extra 20% off upto $50 on 1 item(s)
         </Typography>
-        <Typography>
+        <Typography style={{ display: "flex", alignItems: "center" }}>
           <StyledBadge />
           Get extra 13% off (price inclusive of discount)
         </Typography>
-        <Typography>
+        <Typography style={{ display: "flex", alignItems: "center" }}>
           <StyledBadge />
           Sign up for Flipcart pay later and get flipcart gift card
         </Typography>
-        <Typography>
+        <Typography style={{ display: "flex", alignItems: "center" }}>
           <StyledBadge />
           Buy 2 items save 5%, buy 3 or more save 10%
         </Typography>
