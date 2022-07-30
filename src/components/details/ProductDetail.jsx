@@ -8,8 +8,8 @@ import {
   TableCell,
   styled,
 } from "@mui/material";
-import LocalOfferIcon from "@mui/icons-material/localOffer";
-
+// import LocalOfferIcon from "@mui/icons-material/localOffer";
+import { MdLocalOffer } from "react-icons/md";
 const SmallText = styled(Box)`
   font-size: 14px;
   vertical-align:baseline & > p {
@@ -17,7 +17,7 @@ const SmallText = styled(Box)`
     margin-top: 10px;
   }
 `;
-const StyledBadge = styled(LocalOfferIcon)`
+const StyledBadge = styled(MdLocalOffer)`
   margin-right: 10px;
   color: #00cc00;
   font-size: 15px;
